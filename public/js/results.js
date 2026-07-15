@@ -402,7 +402,7 @@
         if (cancelBtn) { cancelBtn.addEventListener('click', closeRia); }
         if (input) {
             input.addEventListener('keydown', function (e) {
-                if (e.key === 'Enter') { e.preventDefault(); submitRia(); }
+                if (e.key === 'Enter') { e.preventDefault(); var t=(input?input.value:'').trim(); closeRia(); openCreateDrawer(parentId); if(t){drawerTitle.value=t; setTimeout(function(){try{drawerTitle.setSelectionRange(t.length,t.length);}catch(_){}} ,60);} }
                 if (e.key === 'Escape') { closeRia(); }
             });
         }
