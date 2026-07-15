@@ -194,7 +194,6 @@ $render_result_tree_rows = function (array $result, int $depth = 0, array $ances
                 <?php endif; ?>
                 <div class="result-tree-content">
                     <div class="result-title"><?php echo $title_text; ?></div>
-                    <div class="result-desc"><?php echo $desc_text ?: '—'; ?></div>
                 </div>
             </div>
         </div>
