@@ -1,0 +1,32 @@
+<?php
+// Шаблон конфігурації. Скопіюй у config.php і заповни реальні значення.
+define('ROOT_PATH', 'CHANGE_ME');
+define('APP_PATH', 'CHANGE_ME');
+define('PUBLIC_PATH', 'CHANGE_ME');
+define('DB_HOST', 'CHANGE_ME');
+define('DB_PORT', 'CHANGE_ME');
+define('DB_NAME', 'CHANGE_ME');
+define('DB_USER', 'CHANGE_ME');
+define('DB_PASSWORD', 'CHANGE_ME');
+define('DB_CHARSET', 'CHANGE_ME');
+define('APP_NAME', 'CHANGE_ME');
+define('APP_URL', 'CHANGE_ME');
+define('APP_DEBUG', 'CHANGE_ME');
+define('ENABLE_MCP_CONNECTOR', 'CHANGE_ME');
+define('MCP_RATE_LIMIT_READ_PER_MIN', 'CHANGE_ME');
+define('MCP_RATE_LIMIT_WRITE_PER_MIN', 'CHANGE_ME');
+define('GOOGLE_CLIENT_ID', 'CHANGE_ME');
+define('TELEGRAM_BOT_TOKEN', 'CHANGE_ME');
+define('TELEGRAM_BOT_USERNAME', 'CHANGE_ME');
+define('OPENAI_API_KEY', 'CHANGE_ME');
+define('ANTHROPIC_API_KEY', 'CHANGE_ME');
+define('ADMIN_TELEGRAM_ID', 'CHANGE_ME');
+define('WFP_MERCHANT_LOGIN', 'CHANGE_ME');
+define('WFP_MERCHANT_SECRET', 'CHANGE_ME');
+define('WFP_MERCHANT_DOMAIN', 'CHANGE_ME');
+define('WFP_PAY_URL', 'CHANGE_ME');
+define('SUBSCRIPTION_PLANS', 'CHANGE_ME');
+define('SUBSCRIPTION_FREE_MEMBER_LIMIT', 'CHANGE_ME');
+define('TRAINING_PLANS', 'CHANGE_ME');
+define('TRAINING_START_DATE', 'CHANGE_ME');
+define('TRAINING_SEATS_LEFT', 'CHANGE_ME');

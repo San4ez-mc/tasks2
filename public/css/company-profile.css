@@ -1,0 +1,434 @@
+﻿  .company-page {
+    display: grid;
+    gap: 20px;
+  }
+
+  .company-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 1fr) minmax(420px, 1.4fr);
+    gap: 20px;
+  }
+
+  .company-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+    overflow: hidden;
+  }
+
+  .company-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 18px;
+    border-bottom: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, #f1f5f9 0%, #ffffff 100%);
+  }
+
+  .company-card-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .company-subtitle {
+    margin: 4px 0 0;
+    font-size: 13px;
+    color: #475569;
+  }
+
+  .company-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    min-width: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    background: #e2e8f0;
+    color: #0f172a;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .company-card-body {
+    padding: 18px;
+  }
+
+  .company-head-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .company-form {
+    display: grid;
+    gap: 14px;
+  }
+
+  .field {
+    display: grid;
+    gap: 6px;
+  }
+
+  .field label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+  }
+
+  .field input,
+  .field textarea {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: #0f172a;
+    background: #ffffff;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .field textarea {
+    min-height: 110px;
+    resize: vertical;
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+  }
+
+  .company-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .btn-save {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 16px;
+    background: #0ea5e9;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .btn-save:hover {
+    background: #0284c7;
+    transform: translateY(-1px);
+  }
+
+  .company-header-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 9px 14px;
+    background: #e0f2fe;
+    color: #075985;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .company-header-link:hover {
+    background: #bae6fd;
+    transform: translateY(-1px);
+  }
+
+  .employees-table-wrap {
+    overflow-x: auto;
+  }
+
+  .employees-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+  }
+
+  .employees-table th,
+  .employees-table td {
+    text-align: left;
+    padding: 11px 10px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 14px;
+    color: #0f172a;
+    vertical-align: middle;
+  }
+
+  .employees-table th {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #475569;
+    background: #f8fafc;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .employee-name {
+    font-weight: 600;
+  }
+
+  .employee-email {
+    color: #0369a1;
+    text-decoration: none;
+  }
+
+  .employee-email:hover {
+    text-decoration: underline;
+  }
+
+  .role-pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 4px 10px;
+    background: #e0f2fe;
+    color: #0c4a6e;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .employee-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .employee-edit-row {
+    display: none;
+    background: #f8fafc;
+  }
+
+  .employee-edit-cell {
+    padding: 12px 10px !important;
+  }
+
+  .employee-inline-edit-form {
+    display: grid;
+    gap: 10px;
+    border: 1px solid #dbeafe;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .employee-inline-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .employee-inline-field {
+    display: grid;
+    gap: 5px;
+  }
+
+  .employee-inline-field label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #334155;
+  }
+
+  .employee-inline-field input,
+  .employee-inline-field select {
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 7px 9px;
+    font-size: 13px;
+    color: #0f172a;
+    background: #fff;
+  }
+
+  .employee-inline-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+
+  .employee-inline-save,
+  .employee-inline-cancel {
+    border: 0;
+    border-radius: 8px;
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .employee-inline-save {
+    background: #0284c7;
+    color: #fff;
+  }
+
+  .employee-inline-cancel {
+    background: #e2e8f0;
+    color: #334155;
+  }
+
+  .manager-inline-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .manager-inline-form select {
+    min-width: 170px;
+    max-width: 230px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 6px 8px;
+    font-size: 12px;
+    color: #0f172a;
+    background: #fff;
+  }
+
+  .manager-save-btn {
+    border: 0;
+    border-radius: 8px;
+    padding: 6px 9px;
+    background: #e0f2fe;
+    color: #0c4a6e;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .manager-save-btn:hover {
+    background: #bae6fd;
+  }
+
+  .btn-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .btn-edit {
+    background: #eff6ff;
+    color: #1d4ed8;
+  }
+
+  .btn-edit:hover {
+    background: #dbeafe;
+  }
+
+  .btn-delete {
+    background: #fef2f2;
+    color: #b91c1c;
+  }
+
+  .btn-delete:hover {
+    background: #fee2e2;
+  }
+
+  .company-add-user {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 8px 12px;
+    background: #0f172a;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: opacity 0.15s ease;
+  }
+
+  .company-add-user:hover {
+    opacity: 0.9;
+  }
+
+  .employees-empty {
+    padding: 22px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    text-align: center;
+    color: #475569;
+    font-size: 14px;
+    background: #f8fafc;
+  }
+
+  @media (max-width: 1140px) {
+    .company-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .company-card-head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .company-card-body {
+      padding: 14px;
+    }
+
+    .company-head-actions {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    .employee-inline-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .manager-inline-form {
+      flex-wrap: wrap;
+      align-items: stretch;
+    }
+
+    .manager-inline-form select {
+      min-width: 0;
+      max-width: none;
+      width: 100%;
+    }
+
+    .employees-table {
+      min-width: 520px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .employees-table {
+      min-width: 460px;
+    }
+
+    .employees-table th:nth-child(2),
+    .employees-table td:nth-child(2) {
+      display: none;
+    }
+
+    .employee-actions {
+      flex-wrap: wrap;
+    }
+  }

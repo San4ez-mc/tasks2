@@ -1,0 +1,22 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Пропустити реальні файли та папки
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Переписати на index.php
+    RewriteRule ^(.*)$ /index.php [L,QSA]
+</IfModule>
+
+# Включити output buffering щоб усунути BOM з JSON відповідей
+<IfModule mod_php.c>
+    php_value output_buffering 65536
+</IfModule>
+<IfModule mod_php8.c>
+    php_value output_buffering 65536
+</IfModule>
+<IfModule mod_php7.c>
+    php_value output_buffering 65536
+</IfModule>

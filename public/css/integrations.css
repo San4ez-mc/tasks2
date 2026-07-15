@@ -1,0 +1,133 @@
+﻿  .integration-page {
+    max-width: 920px;
+    display: grid;
+    gap: 16px;
+  }
+
+  .integration-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: #fff;
+    padding: 18px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  }
+
+  .integration-title {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #0f172a;
+  }
+
+  .integration-subtitle {
+    margin: 0;
+    color: #475569;
+    font-size: 14px;
+  }
+
+  .steps {
+    margin: 12px 0 0;
+    padding-left: 18px;
+    color: #0f172a;
+    line-height: 1.6;
+  }
+
+  .code-box {
+    margin-top: 12px;
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 12px;
+    overflow-x: auto;
+    font-size: 13px;
+  }
+
+  .copy-wrap {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .copy-wrap .code-box {
+    margin-top: 0;
+    flex: 1;
+  }
+
+  .copy-btn {
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #0f172a;
+    width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .copy-btn:hover {
+    background: #f8fafc;
+  }
+
+  .actions-row {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn-danger {
+    background: #dc2626;
+    color: #fff;
+  }
+
+  .btn-outline {
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    color: #0f172a;
+  }
+
+  .api-token-list {
+    margin-top: 12px;
+    display: grid;
+    gap: 10px;
+  }
+
+  .api-token-item {
+    border: 1px solid #dbeafe;
+    border-radius: 12px;
+    background: #f8fbff;
+    padding: 10px;
+  }
+
+  .api-token-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .api-token-meta {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #475569;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 12px;
+    border: 0;
+    border-radius: 10px;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #0f172a;
+    color: #fff;
+    text-decoration: none;
+  }
