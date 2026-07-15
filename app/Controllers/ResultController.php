@@ -46,7 +46,18 @@ class ResultController
         $result_model = new Result();
         $all_results = $result_model->get_by_company($company_id);
 
-        $results = array_values(array_filter($all_results, function ($result) use ($user, $selected_tab, $selected_status, $selected_assignee, $selected_reporter, $search_query) {
+        $by_id = [];
+        foreach ($all_results as $r0) { $by_id[(int) ($r0['id'] ?? 0)] = $r0; }
+        $has_done_ancestor = function ($result) use ($by_id) {
+            $pid = (int) ($result['parent_id'] ?? 0); $g = 0;
+            while ($pid && isset($by_id[$pid]) && $g++ < 50) {
+                $p = $by_id[$pid];
+                if ((int) ($p['completed'] ?? 0) === 1 || (string) ($p['status'] ?? '') === 'done') { return true; }
+                $pid = (int) ($p['parent_id'] ?? 0);
+            }
+            return false;
+        };
+        $results = array_values(array_filter($all_results, function ($result) use ($user, $selected_tab, $selected_status, $selected_assignee, $selected_reporter, $search_query, $has_done_ancestor) {
             $assignee_id = (int) ($result['assignee_id'] ?? 0);
             $reporter_id = (int) ($result['reporter_id'] ?? 0);
             $user_id = (int) ($user['id'] ?? 0);
@@ -78,6 +89,10 @@ class ResultController
             }
 
             if ($selected_status !== 'all' && $status !== $selected_status) {
+                return false;
+            }
+
+            if ($selected_status !== 'all' && $has_done_ancestor($result)) {
                 return false;
             }
 
