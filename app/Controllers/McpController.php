@@ -295,6 +295,7 @@ class McpController
             'delete_plan_item' => ['method' => 'DELETE', 'path' => '/weekly-plans/items/' . (int) ($args['item_id'] ?? 0), 'query' => [], 'body' => ['confirm' => (bool) ($args['confirm'] ?? false), 'dry_run' => (bool) ($args['dry_run'] ?? false)]],
             'get_plan_summary' => ['method' => 'GET', 'path' => '/weekly-plans/summary', 'query' => $args, 'body' => null],
 
+            'create_employee' => ['method' => 'POST', 'path' => '/company/members', 'query' => [], 'body' => $args],
             'list_team_members' => ['method' => 'GET', 'path' => '/company/members', 'query' => [], 'body' => null],
             'get_dashboard_summary' => ['method' => 'GET', 'path' => '/dashboard/summary', 'query' => $args, 'body' => null],
 
@@ -632,6 +633,22 @@ class McpController
                     'required' => ['project_id'],
                     'properties' => [
                         'project_id' => ['type' => 'integer'],
+                    ],
+                ],
+            ],
+            [
+                'name' => 'create_employee',
+                'description' => 'Add an employee to the company (creates user if new)',
+                'inputSchema' => [
+                    'type' => 'object',
+                    'required' => ['first_name', 'email'],
+                    'properties' => [
+                        'first_name' => ['type' => 'string'],
+                        'last_name' => ['type' => 'string'],
+                        'email' => ['type' => 'string'],
+                        'title' => ['type' => 'string'],
+                        'telegram_id' => ['type' => 'integer'],
+                        'telegram_username' => ['type' => 'string'],
                     ],
                 ],
             ],

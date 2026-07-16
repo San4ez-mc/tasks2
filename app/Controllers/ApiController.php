@@ -159,6 +159,11 @@ class ApiController
             }
         }
 
+        if ($resource === 'company' && ($parts[3] ?? '') === 'members' && $method === 'POST') {
+            $this->createMember($context);
+            return;
+        }
+
         if ($resource === 'company' && ($parts[3] ?? '') === 'members' && $method === 'GET') {
             $this->listTeamMembers($context);
             return;
@@ -1341,6 +1346,37 @@ class ApiController
         ];
         $this->logConnector('get_project', ['project_id' => $projectId], ['id' => $result['id']], 'ok', null, $context, $this->durationMs($started));
         json_response($result);
+    }
+
+    private function createMember(array $context): void
+    {
+        $started = microtime(true);
+        $companyId = (int) $context['company_id'];
+        $body = $this->jsonBody();
+        $firstName = trim((string) ($body['first_name'] ?? $body['name'] ?? ''));
+        $lastName = trim((string) ($body['last_name'] ?? ''));
+        $email = trim((string) ($body['email'] ?? ''));
+        if ($firstName === '' || $email === '') { json_response(['ok' => false, 'error' => 'first_name and email are required.'], 422); }
+        $userModel = new \App\Models\User();
+        $existing = $userModel->get_by_email($email);
+        if ($existing) {
+            $userId = (int) $existing['id'];
+            $userModel->update($userId, array_filter(['first_name' => $firstName, 'last_name' => $lastName], static fn($v) => $v !== ''));
+        } else {
+            $tgUser = isset($body['telegram_username']) ? strtolower(ltrim((string) $body['telegram_username'], '@')) : '';
+            $userModel->create([
+                'first_name' => $firstName, 'last_name' => $lastName, 'email' => $email,
+                'password' => $body['password'] ?? substr(md5((string) microtime(true)), 0, 8),
+                'telegram_id' => isset($body['telegram_id']) && $body['telegram_id'] !== '' ? (int) $body['telegram_id'] : null,
+                'username' => $tgUser !== '' ? $tgUser : null,
+            ]);
+            $new = $userModel->get_by_email($email);
+            if (!$new) { json_response(['ok' => false, 'error' => 'Failed to create user.'], 500); }
+            $userId = (int) $new['id'];
+        }
+        $this->companyModel->add_employee($companyId, $userId, trim((string) ($body['title'] ?? '')) ?: null, 'member', null);
+        $this->logConnector('create_employee', $body, ['user_id' => $userId], 'ok', null, $context, $this->durationMs($started));
+        json_response(['ok' => true, 'user_id' => $userId, 'name' => trim($firstName . ' ' . $lastName)], 201);
     }
 
     private function deleteProject(int $projectId, array $context): void
