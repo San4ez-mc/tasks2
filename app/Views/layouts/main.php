@@ -28,6 +28,7 @@ $menu_items = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $title ?? APP_NAME; ?></title>
+    <link rel="icon" type="image/svg+xml" href="/public/favicon.svg?v=1" />
     <style>
         * {
             margin: 0;
