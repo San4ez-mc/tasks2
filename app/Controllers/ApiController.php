@@ -153,6 +153,10 @@ class ApiController
                 $this->updateProject((int) $id, $context);
                 return;
             }
+            if ($method === 'DELETE' && $id !== null) {
+                $this->deleteProject((int) $id, $context);
+                return;
+            }
         }
 
         if ($resource === 'company' && ($parts[3] ?? '') === 'members' && $method === 'GET') {
@@ -1339,6 +1343,20 @@ class ApiController
         json_response($result);
     }
 
+    private function deleteProject(int $projectId, array $context): void
+    {
+        $started = microtime(true);
+        $companyId = (int) $context['company_id'];
+        $project = $this->projectModel->get_by_id($projectId);
+        if (!$project || (int) ($project['company_id'] ?? 0) !== $companyId) {
+            json_response(['ok' => false, 'error' => 'Project not found.'], 404);
+        }
+        $stmt = $this->db->query("DELETE FROM projects WHERE id = :id AND company_id = :company_id");
+        $stmt->bind(':id', $projectId)->bind(':company_id', $companyId)->execute();
+        $this->logConnector('delete_project', ['project_id' => $projectId], ['deleted' => true], 'ok', null, $context, $this->durationMs($started));
+        json_response(['ok' => true, 'deleted' => true, 'project_id' => $projectId]);
+    }
+
     private function createProject(array $context): void
     {
         $started = microtime(true);
@@ -1357,7 +1375,7 @@ class ApiController
             json_response(['ok' => true, 'dry_run' => true, 'name' => $name]);
         }
 
-        $projectId = $this->db->insert('projects', [
+        $this->db->insert('projects', [
             'company_id' => $companyId,
             'name' => $name,
             'description' => trim((string) ($body['description'] ?? '')),
@@ -1366,6 +1384,7 @@ class ApiController
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
+        $projectId = (int) $this->db->lastInsertId();
         if (!$projectId) {
             json_response(['ok' => false, 'error' => 'Failed to create project.'], 500);
         }

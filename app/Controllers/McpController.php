@@ -302,6 +302,7 @@ class McpController
             'get_project' => ['method' => 'GET', 'path' => '/projects/' . (int) ($args['project_id'] ?? 0), 'query' => [], 'body' => null],
             'create_project' => ['method' => 'POST', 'path' => '/projects', 'query' => [], 'body' => $args],
             'update_project' => ['method' => 'PATCH', 'path' => '/projects/' . (int) ($args['project_id'] ?? 0), 'query' => [], 'body' => ['fields' => $args['fields'] ?? [], 'dry_run' => (bool) ($args['dry_run'] ?? false)]],
+            'delete_project' => ['method' => 'DELETE', 'path' => '/projects/' . (int) ($args['project_id'] ?? 0), 'query' => [], 'body' => null],
             default => null,
         };
     }
@@ -620,6 +621,17 @@ class McpController
                             ],
                         ],
                         'dry_run' => ['type' => 'boolean'],
+                    ],
+                ],
+            ],
+            [
+                'name' => 'delete_project',
+                'description' => 'Delete a project by id',
+                'inputSchema' => [
+                    'type' => 'object',
+                    'required' => ['project_id'],
+                    'properties' => [
+                        'project_id' => ['type' => 'integer'],
                     ],
                 ],
             ],
