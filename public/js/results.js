@@ -408,3 +408,15 @@
         }
     });
 })();
+// ===== Bulk-дії над вибраними цілями =====
+(function(){
+  var bar=document.getElementById('bulkBar'); if(!bar) return;
+  var countEl=document.getElementById('bulkCount'); var selected=new Set();
+  function refresh(){ countEl.textContent=selected.size; bar.style.display=selected.size?'flex':'none'; }
+  document.querySelectorAll('.bulk-select').forEach(function(cb){ cb.addEventListener('change',function(){ var r=cb.getAttribute('data-rid'); if(cb.checked)selected.add(r); else selected.delete(r); refresh(); }); });
+  function run(fn){ var a=Array.from(selected); (async function(){ for(var i=0;i<a.length;i++){ try{ await fn(a[i]); }catch(e){} } location.reload(); })(); }
+  var bc=document.getElementById('bulkComplete'); if(bc) bc.addEventListener('click',function(){ run(function(r){ return fetch('/results/complete/'+r,{method:'POST',credentials:'same-origin'}); }); });
+  var bd=document.getElementById('bulkDelete'); if(bd) bd.addEventListener('click',function(){ if(!confirm('Видалити вибрані ('+selected.size+')?'))return; run(function(r){ return fetch('/results/delete/'+r,{method:'POST',credentials:'same-origin'}); }); });
+  var ba=document.getElementById('bulkAssignee'); if(ba) ba.addEventListener('change',function(){ var v=ba.value; if(!v)return; var body=new URLSearchParams(); body.set('assignee_id',v); run(function(r){ return fetch('/results/assign/'+r,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString(),credentials:'same-origin'}); }); });
+  var bx=document.getElementById('bulkCancel'); if(bx) bx.addEventListener('click',function(){ selected.clear(); document.querySelectorAll('.bulk-select:checked').forEach(function(c){c.checked=false;}); refresh(); });
+})();

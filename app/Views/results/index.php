@@ -181,7 +181,7 @@ $render_result_tree_rows = function (array $result, int $depth = 0, array $ances
                 <input type="hidden" name="completed" value="<?php echo (int) (!empty($result['completed']) ? 0 : 1); ?>" />
                 <input type="hidden" name="return_url"
                     value="<?php echo htmlspecialchars($_SERVER['REQUEST_URI'] ?? '/results'); ?>" />
-                <input class="result-check" type="checkbox" <?php echo (int) ($result['completed'] ?? 0) === 1 ? 'checked' : ''; ?> onchange="this.form.submit()" />
+                <input class="result-check bulk-select" type="checkbox" data-rid="<?php echo $rid; ?>" onclick="event.stopPropagation();" title="Вибрати" />
             </form>
         </div>
         <div>
@@ -251,6 +251,16 @@ ob_start();
     };
 </script>
 <section class="results-page">
+<style>.bulk-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:50;background:#1f2937;color:#fff;border-radius:10px;padding:8px 12px;display:flex;gap:8px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25);font-size:13px}.bulk-bar select,.bulk-bar button{font-size:13px;border-radius:7px;padding:5px 10px;border:1px solid #374151;background:#374151;color:#fff;cursor:pointer}.bulk-bar button:hover{background:#4b5563}</style>
+<div id="bulkBar" class="bulk-bar" style="display:none;">
+  <span><b id="bulkCount">0</b> вибрано</span>
+  <button type="button" id="bulkComplete">✓ Завершити</button>
+  <select id="bulkAssignee"><option value="">Відповідальний…</option>
+  <?php foreach (($employees ?? []) as $e): ?><option value="<?php echo (int) ($e['id'] ?? 0); ?>"><?php echo htmlspecialchars((string) ($e['full_name'] ?? $e['name'] ?? '')); ?></option><?php endforeach; ?>
+  </select>
+  <button type="button" id="bulkDelete">Видалити</button>
+  <button type="button" id="bulkCancel">Скасувати</button>
+</div>
 
     <div class="results-shell">
         <header class="results-header">

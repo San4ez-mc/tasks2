@@ -333,6 +333,13 @@ try {
                         not_found();
                     }
                     break;
+                case 'assign':
+                    if ($request_method === 'POST') {
+                        $result->assignAjax($id);
+                    } else {
+                        not_found();
+                    }
+                    break;
                 default:
                     not_found();
             }

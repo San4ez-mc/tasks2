@@ -398,6 +398,30 @@ class ResultController
         json_response(['success' => true]);
     }
 
+    public function assignAjax($id)
+    {
+        $company_id = $_SESSION['company_id'] ?? null;
+        if (!$company_id) { json_response(['error' => 'Not authorized'], 403); }
+        $result_model = new Result();
+        $result = $result_model->get_by_id($id);
+        if (!$result || $result['company_id'] != $company_id) { json_response(['error' => 'Result not found'], 404); }
+        $assignee_id = (int) (post_param('assignee_id') ?? 0);
+        try {
+            $result_model->update($id, [
+                'title' => $result['title'],
+                'description' => $result['description'] ?? null,
+                'expected_result' => $result['expected_result'] ?? null,
+                'instruction' => $result['instruction'] ?? null,
+                'deadline' => $result['deadline'] ?? null,
+                'status' => $result['status'] ?? 'in-progress',
+                'completed' => $result['completed'] ?? 0,
+                'assignee_id' => $assignee_id ?: null,
+                'parent_id' => $result['parent_id'] ?? null,
+            ]);
+        } catch (\Throwable $e) { json_response(['error' => 'Failed'], 500); }
+        json_response(['success' => true]);
+    }
+
     /**
      * Видалити результат
      */
